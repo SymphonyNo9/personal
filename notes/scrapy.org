@@ -1,0 +1,20 @@
+* configuration settings
+** /etc/scrapy.cfg > 个人设置 ~/.config/scrapy.cfg > 项目配置scrapy.cfg
+** 环境变量设置
+
+* 命令行
+** scrapy 全局命令
+** 有些命令只能在项目内执行
+*** crawl 执行爬命令
+*** shell 调试比较常用
+
+* spiders
+处理一个被爬下来的网站，基本是链接处理，结构化数据。
+用户为网站单独定制的行为
+** 流程
+   1. 从一堆urls里开始发送请求
+   2. 在回调函数里处理页面，比如用selector解析page
+   3. 回调函数通常返回items或者接着返回新的response请求
+   4. 这些items通过pipeline处理存储，输出等
+
+
