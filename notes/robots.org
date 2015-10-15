@@ -1,0 +1,15 @@
+* 概念
+Robots Exclusion Protocal
+从名字可知用来告诉爬虫程序哪些地址是不被允许爬的
+但是这个没有什么约束力
+* 创建robots.txt
+** 位置
+   放在web server的根目录下,全部小写
+** 内容
+   user-agent:
+   Disallow:
+
+* sitemaps
+  用来告知爬虫程序如何获取到网站的网址可以爬
+  xml格式
+  书写格式[[link][http://www.sitemaps.org/zh_TW/protocol.html]]

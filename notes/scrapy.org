@@ -16,5 +16,46 @@
    2. 在回调函数里处理页面，比如用selector解析page
    3. 回调函数通常返回items或者接着返回新的response请求
    4. 这些items通过pipeline处理存储，输出等
+** 常用spider类
+   1. crawlSpider. 通过rule正则匹配来爬虫，比较常用可扩展的类（parse方法有用）
+   2. xmlfeedSpider. 通过迭代各个节点来分析xml源， 类似的csvfeedSpider
+   3. sitemapSpider. 通过robots.txt机器人协议来爬网站
+   
+* Selectors ::解析爬到的response
+** 工作方式
+   基于文本或者response构造
+   利用xpath协议或者css协议查找html页面的节点，lxml实现方式
+   结合正则表达式可以达到很强大的功能了，注意用extract方法获取原文内容
 
+* Items
+  scrapy spider可以返回python字典，但是现在提供一种更上层的封装，Item类
+** Field类其实才是原生的python dict
+** Item 继承基类mapping 和 trackref
+   ＋trackref 纪录new出来的对象的信息，便于debug
+   ＋mapping 管理key－value结构
 
+* Item Loader
+  虽然可以直接操作item类，因为就是dict结构，但是这是一个封装的控制器
+  add_xpath, add_css, add_value, 填充数据，最后load_item执行合并
+  override之后可以定义加入时的行为
+
+* Item Pipeline
+** 典型应用
+   ＋ 清理HTML数据
+   ＋ 验证爬取的数据(检查item包含某些字段)	
+   ＋ 查重(并丢弃)
+   ＋ 将爬取结果保存到数据库中
+** 用法
+   override function process_item()
+   
+* Feed exports
+  通用的几种存储方式
+
+* 请求和回应
+** TODO Request
+   生命周期从spider创建，在downloader中结束，downloader中执行网络请求并返回Response
+   查看具体类实现
+   
+* Link Extractors
+  用于从网页中抽取会被follow的链接对象
+  
