@@ -59,3 +59,11 @@
 * Link Extractors
   用于从网页中抽取会被follow的链接对象
   
+* tor :ip pool:
+  防止ip被ban，利用tor在底层建立链路（网桥）代理，实现混淆ip的作用
+  socks5代理，默认端口9050
+** meek
+   因为tor服务的很多ip地址直接被gfw屏蔽，所以利用meek混淆，寻找云端的ip池，加密等技术绕过屏蔽
+   meek用golang编译，在torrc里配置一个meek-client
+** polipo
+   一个更加底层的轻量级代理，将tor搭在其上运行。http默认端口8123

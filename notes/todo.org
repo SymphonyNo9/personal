@@ -1,0 +1,6 @@
+* 公司事项
+** TODO git 服务器
+** spider ip change
+*** DONE tor
+** Distributed spider
+*** TODO scrapy_redis
