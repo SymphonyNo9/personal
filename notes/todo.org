@@ -1,6 +1,27 @@
 * 公司事项
+** DONE spider template
+   + 建立template
+   + 部署脚本
 ** TODO git 服务器
 ** spider ip change
 *** DONE tor
 ** Distributed spider
-*** TODO scrapy_redis
+*** TODO scrapy_redis 
+    <2015-10-26 一>
+** 研究google等现有爬虫
+   + 伪装
+** TODO 爬特定网站
+   <2015-10-27 二>
+*** weibo
+    - 登陆
+    - 
+*** 知乎
+*** baike, wiki
+*** 贴吧
+*** 论坛，（宅男，宅女）
+
+** 爬虫简介
+   <2015-10-26 一>
+** TODO 性能问题
+*** 网络，cpu等测试
+    <2015-10-28 三>

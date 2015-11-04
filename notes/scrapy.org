@@ -67,3 +67,10 @@
    meek用golang编译，在torrc里配置一个meek-client
 ** polipo
    一个更加底层的轻量级代理，将tor搭在其上运行。http默认端口8123
+* scrapy_redis
+** scheduler
+   用queue或者stack来实现
+** duplicator
+   用sets实现，对每个request进行hash，然后插入判重
+   hash的计算包含url，method，http头信息等，参见scrapy.request, 以便定制hash信息
+
