@@ -1,0 +1,47 @@
+* redis
+  内存数据库，支持list，set等结构，nosql
+** 配置，部署
+   /etc/redis.conf or /etc/redis/redis.conf
+** cluster
+   3.0之后版本自带集群功能，走配置文件
+   两个用途：
+   － 在多个节点之间共享数据
+   － 当集群子集挂掉时可以继续运行
+*** redis nodes
+*** 端口
+    tcp协议，一个redis服务端口6379，一个cluster bus端口16379
+*** config
+    cluster-enabled yes : 
+    cluster-config-file nodes.conf : 非人为修改的文件，纪录各个nodes状态等信息
+    cluster-node-timeout 5000 : nodes超时连接
+
+* redis-cluster部署
+** 安装部分
+  1. mkdir /home/redis
+  2. cd /home/redis
+  3. mkdir redis-cluster
+  4. wget http://download.redis.io/releases/redis-3.0.5.tar.gz 下载
+  5. tar xf redis-3.0.5.tar.gz
+  6. cd redis-3.0.5/
+  7. make
+  8. cd src
+  9. cp redis-benchmark redis-check-aof redis-check-dump redis-cli redis-server mkreleasehdr.sh redis-trib.rb /usr/bin/
+  10. cd ../../redis-cluster
+  11. cp /usr/bin/redis-server ./
+  12. cp ../redis-3.0.5/redis.conf ./
+** 启动每个节点，这部分主要看你想怎么部署
+   1. mkdir 节点目录dir（一般已端口命名比较清晰）
+   2. cp ./redis-server dir/
+   3. cp ./redis.conf dir/
+   修改或替换必要配置
+   - stop-writes-on-bgsave-error no 备份失败时仍可访问
+   - daemonlize yes 守护进程
+   - port XXXX 端口
+   - cluster-enabled yes 开启集群模式
+   - cluster-config-file nodes-XXXX.conf 集群节点状态文件
+   - cluster-node-timeout 15000
+** 运行
+   ./redis-server ./redis-conf
+** 部署集群
+   1. gem install redis 安装ruby的redis客户端
+   2. ./redis-trib.rb create 127.0.0.1:7000 127.0.0.1:7001 127.0.0.1:7002  开启集群

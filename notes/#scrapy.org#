@@ -1,0 +1,76 @@
+* configuration settings
+** /etc/scrapy.cfg > ‘¸ö‘ÈË‘Éè‘ÖÃ ~/.config/scrapy.cfg > ‘Ïî‘Ä¿‘Åä‘ÖÃscrapy.cfg
+** ‘»·‘¾³‘±ä‘Á¿‘Éè‘ÖÃ
+
+* ‘Ãü‘Áî‘ÐÐ
+** scrapy ‘È«‘¾Ö‘Ãü‘Áî
+** ‘ÓÐ‘Ð©‘Ãü‘Áî‘Ö»‘ÄÜ‘ÔÚ‘Ïî‘Ä¿‘ÄÚ‘Ö´‘ÐÐ
+*** crawl ‘Ö´‘ÐÐ‘ÅÀ‘Ãü‘Áî
+*** shell ‘µ÷‘ÊÔ‘±È‘½Ï‘³£‘ÓÃ
+
+* spiders
+‘´¦‘Àí‘Ò»‘¸ö‘±»‘ÅÀ‘ÏÂ‘À´‘µÄ‘Íø‘Õ¾‘£¬‘»ù‘±¾‘ÊÇ‘Á´‘½Ó‘´¦‘Àí‘£¬‘½á‘¹¹‘»¯‘Êý‘¾Ý‘¡£
+‘ÓÃ‘»§‘Îª‘Íø‘Õ¾‘µ¥‘¶À‘¶¨‘ÖÆ‘µÄ‘ÐÐ‘Îª
+** ‘Á÷‘³Ì
+   1. ‘´Ó‘Ò»‘¶Ñurls‘Àï‘¿ª‘Ê¼‘·¢‘ËÍ‘Çë‘Çó
+   2. ‘ÔÚ‘»Ø‘µ÷‘º¯‘Êý‘Àï‘´¦‘Àí‘Ò³‘Ãæ‘£¬‘±È‘Èç‘ÓÃselector‘½â‘Îöpage
+   3. ‘»Ø‘µ÷‘º¯‘Êý‘Í¨‘³£‘·µ‘»Øitems‘»ò‘Õß‘½Ó‘×Å‘·µ‘»Ø‘ÐÂ‘µÄresponse‘Çë‘Çó
+   4. ‘Õâ‘Ð©items‘Í¨‘¹ýpipeline‘´¦‘Àí‘´æ‘´¢‘£¬‘Êä‘³ö‘µÈ
+** ‘³£‘ÓÃspider‘Àà
+   1. crawlSpider. ‘Í¨‘¹ýrule‘Õý‘Ôò‘Æ¥‘Åä‘À´‘ÅÀ‘³æ‘£¬‘±È‘½Ï‘³£‘ÓÃ‘¿É‘À©‘Õ¹‘µÄ‘Àà‘£¨parse‘·½‘·¨‘ÓÐ‘ÓÃ‘£©
+   2. xmlfeedSpider. ‘Í¨‘¹ý‘µü‘´ú‘¸÷‘¸ö‘½Ú‘µã‘À´‘·Ö‘Îöxml‘Ô´‘£¬ ‘Àà‘ËÆ‘µÄcsvfeedSpider
+   3. sitemapSpider. ‘Í¨‘¹ýrobots.txt‘»ú‘Æ÷‘ÈË‘Ð­‘Òé‘À´‘ÅÀ‘Íø‘Õ¾
+   
+* Selectors ::‘½â‘Îö‘ÅÀ‘µ½‘µÄresponse
+** ‘¹¤‘×÷‘·½‘Ê½
+   ‘»ù‘ÓÚ‘ÎÄ‘±¾‘»ò‘Õßresponse‘¹¹‘Ôì
+   ‘Àû‘ÓÃxpath‘Ð­‘Òé‘»ò‘Õßcss‘Ð­‘Òé‘²é‘ÕÒhtml‘Ò³‘Ãæ‘µÄ‘½Ú‘µã‘£¬lxml‘Êµ‘ÏÖ‘·½‘Ê½
+   ‘½á‘ºÏ‘Õý‘Ôò‘±í‘´ï‘Ê½‘¿É‘ÒÔ‘´ï‘µ½‘ºÜ‘Ç¿‘´ó‘µÄ‘¹¦‘ÄÜ‘ÁË‘£¬‘×¢‘Òâ‘ÓÃextract‘·½‘·¨‘»ñ‘È¡‘Ô­‘ÎÄ‘ÄÚ‘ÈÝ
+
+* Items
+  scrapy spider‘¿É‘ÒÔ‘·µ‘»Øpython‘×Ö‘µä‘£¬‘µ«‘ÊÇ‘ÏÖ‘ÔÚ‘Ìá‘¹©‘Ò»‘ÖÖ‘¸ü‘ÉÏ‘²ã‘µÄ‘·â‘×°‘£¬Item‘Àà
+** Field‘Àà‘Æä‘Êµ‘²Å‘ÊÇ‘Ô­‘Éú‘µÄpython dict
+** Item ‘¼Ì‘³Ð‘»ù‘Ààmapping ‘ºÍ trackref
+   ‘£«trackref ‘¼Í‘Â¼new‘³ö‘À´‘µÄ‘¶Ô‘Ïó‘µÄ‘ÐÅ‘Ï¢‘£¬‘±ã‘ÓÚdebug
+   ‘£«mapping ‘¹Ü‘Àíkey‘£­value‘½á‘¹¹
+
+* Item Loader
+  ‘Ëä‘È»‘¿É‘ÒÔ‘Ö±‘½Ó‘²Ù‘×÷item‘Àà‘£¬‘Òò‘Îª‘¾Í‘ÊÇdict‘½á‘¹¹‘£¬‘µ«‘ÊÇ‘Õâ‘ÊÇ‘Ò»‘¸ö‘·â‘×°‘µÄ‘¿Ø‘ÖÆ‘Æ÷
+  add_xpath, add_css, add_value, ‘Ìî‘³ä‘Êý‘¾Ý‘£¬‘×î‘ºóload_item‘Ö´‘ÐÐ‘ºÏ‘²¢
+  override‘Ö®‘ºó‘¿É‘ÒÔ‘¶¨‘Òå‘¼Ó‘Èë‘Ê±‘µÄ‘ÐÐ‘Îª
+
+* Item Pipeline
+** ‘µä‘ÐÍ‘Ó¦‘ÓÃ
+   ‘£« ‘Çå‘ÀíHTML‘Êý‘¾Ý
+   ‘£« ‘Ñé‘Ö¤‘ÅÀ‘È¡‘µÄ‘Êý‘¾Ý(‘¼ì‘²éitem‘°ü‘º¬‘Ä³‘Ð©‘×Ö‘¶Î)	
+   ‘£« ‘²é‘ÖØ(‘²¢‘¶ª‘Æú)
+   ‘£« ‘½«‘ÅÀ‘È¡‘½á‘¹û‘±£‘´æ‘µ½‘Êý‘¾Ý‘¿â‘ÖÐ
+** ‘ÓÃ‘·¨
+   override function process_item()
+   
+* Feed exports
+  ‘Í¨‘ÓÃ‘µÄ‘¼¸‘ÖÖ‘´æ‘´¢‘·½‘Ê½
+
+* ‘Çë‘Çó‘ºÍ‘»Ø‘Ó¦
+** TODO Request
+   ‘Éú‘Ãü‘ÖÜ‘ÆÚ‘´Óspider‘´´‘½¨‘£¬‘ÔÚdownloader‘ÖÐ‘½á‘Êø‘£¬downloader‘ÖÐ‘Ö´‘ÐÐ‘Íø‘Âç‘Çë‘Çó‘²¢‘·µ‘»ØResponse
+   ‘²é‘¿´‘¾ß‘Ìå‘Àà‘Êµ‘ÏÖ
+   
+* Link Extractors
+  ‘ÓÃ‘ÓÚ‘´Ó‘Íø‘Ò³‘ÖÐ‘³é‘È¡‘»á‘±»follow‘µÄ‘Á´‘½Ó‘¶Ô‘Ïó
+  
+* tor :ip pool:
+  ‘·À‘Ö¹ip‘±»ban‘£¬‘Àû‘ÓÃtor‘ÔÚ‘µ×‘²ã‘½¨‘Á¢‘Á´‘Â·‘£¨‘Íø‘ÇÅ‘£©‘´ú‘Àí‘£¬‘Êµ‘ÏÖ‘»ì‘Ïýip‘µÄ‘×÷‘ÓÃ
+  socks5‘´ú‘Àí‘£¬‘Ä¬‘ÈÏ‘¶Ë‘¿Ú9050
+** meek
+   ‘Òò‘Îªtor‘·þ‘Îñ‘µÄ‘ºÜ‘¶àip‘µØ‘Ö·‘Ö±‘½Ó‘±»gfw‘ÆÁ‘±Î‘£¬‘Ëù‘ÒÔ‘Àû‘ÓÃmeek‘»ì‘Ïý‘£¬‘Ñ°‘ÕÒ‘ÔÆ‘¶Ë‘µÄip‘³Ø‘£¬‘¼Ó‘ÃÜ‘µÈ‘¼¼‘Êõ‘ÈÆ‘¹ý‘ÆÁ‘±Î
+   meek‘ÓÃgolang‘±à‘Òë‘£¬‘ÔÚtorrc‘Àï‘Åä‘ÖÃ‘Ò»‘¸ömeek-client
+** polipo
+   ‘Ò»‘¸ö‘¸ü‘¼Ó‘µ×‘²ã‘µÄ‘Çá‘Á¿‘¼¶‘´ú‘Àí‘£¬‘½«tor‘´î‘ÔÚ‘Æä‘ÉÏ‘ÔË‘ÐÐ‘¡£http‘Ä¬‘ÈÏ‘¶Ë‘¿Ú8123
+* scrapy_redis
+** scheduler
+   ‘ÓÃqueue‘»ò‘Õßstack‘À´‘Êµ‘ÏÖ
+** duplicator
+   ‘ÓÃsets‘Êµ‘ÏÖ‘£¬‘¶Ô‘Ã¿‘¸örequest‘½ø‘ÐÐhash‘£¬‘È»‘ºó‘²å‘Èë‘ÅÐ‘ÖØ
+   hash‘µÄ‘¼Æ‘Ëã‘°ü‘º¬url‘£¬method‘£¬http‘Í·‘ÐÅ‘Ï¢‘µÈ‘£¬‘²Î‘¼ûscrapy.request, ‘ÒÔ‘±ã‘¶¨‘ÖÆhash‘ÐÅ‘Ï¢
+
