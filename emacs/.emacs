@@ -1,7 +1,9 @@
 ;; emacs lisp
 
 ;; load other set
-(add-to-list 'load-path ".emacs.d/rinari")
+;;(require 'load-relative)
+;;(load-relative ".emacs.d/rinari")
+(add-to-list 'load-path "./.emacs.d/rinari")
 (require 'rinari)
 
 ;; large kill-ring

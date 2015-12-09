@@ -1,0 +1,38 @@
+* 会议记录
+** <2015-11-24 二>
+*** vision
+    忘记它是一个机器人
+*** 产品
+    以情感计算为核心，并结合功能的人工智能
+    做平台
+*** AI evolving
+   被动式的学习－》主动？？－》模拟
+*** 基础架构和模块
+   ？？？
+*** 普及策略
+   情感交流－》信任
+   对话－》personal agent 
+   - memory 
+   - understanding 
+   - knowleage
+*** 2015/04目标
+    demo
+** <2015-12-02 三>
+   产品经理对于问题进行场景分类，然后根据分类决定数据的一些反馈方式
+   持续对话
+*** topic model
+    一次对话包含很多topic，
+    - initial 
+    - 
+    pattern recongize  =>  memory （自动转换话题 topical contral）
+*** understanding before have personality
+*** 观念
+    - dream big , act quickly. not ask peremission, encourage mistakes
+    - creativity
+    - destractive innovation
+    - anything is possible
+    - team work (看长处)
+    - mean what you say, say what you mean (诚信)
+    - belive passion
+    - love not only like
+    - simplify and focus
