@@ -1,0 +1,8 @@
+* common issue
+** filesystem
+   do not use local filesystem, 有一些版本可能会出错
+* thrift
+  thrift, restful -> hbase client -> hbase -> hdfs
+** python
+*** 数据类型
+    all values are passed around as strings
