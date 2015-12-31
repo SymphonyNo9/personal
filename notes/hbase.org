@@ -1,8 +1,38 @@
 * common issue
 ** filesystem
    do not use local filesystem, 有一些版本可能会出错
+* 文档学习
+** 安装和运行							     :review:
+   + 环境变量需要设置JAVA_HOME,可以放在/etc/profile中
+   + 安装包中conf里是配置文件, hbase-site.xml是主要配置
+   + start-hbase.sh 启动脚本. 
+   + stop-hbase.sh :: stop hbase
+   + jps可以查看节点？ 
+*** 分布式配置	:review: 					     :review:
+    1. 指定hbase以分布式节点方式运行，启动一个jvm实例 
+       <property>
+         <name>hbase.cluster.distributed</name>
+         <value>true</value>
+       </property>
+    2. 更改hbase根目录，指向hdfs
+       hbase.rootdir
+    3. master node, [[http://blog.itpub.net/22664653/viewspace-715469/][backupmaster]], [[http://www.binospace.com/index.php/hbase-in-depth-analysis-of-the-regionserver/][regionserver]], zookeeper
+    4. 每个node上配置文件应该一致
+       
+** 命令行工具 habse shell
+   + list
+   + put 'table', 'rowkey', 'col_family:col', 'vaule'
+   + scan 'table'
+   + get 'table', 'row'
+   + disable/enable 'table' :: 如果要修改表信息，需要先disable表
+   + drop 'table' 
+** table, row , and column
+   + column has family
+** 概念理解
+*** [[http://jimbojw.com/wiki/index.php?title=Understanding_Hbase_and_BigTable][big table 模型]]
+
 * thrift
   thrift, restful -> hbase client -> hbase -> hdfs
 ** python
 *** 数据类型
-    all values are passed around as strings
+    all values are passed around as string
