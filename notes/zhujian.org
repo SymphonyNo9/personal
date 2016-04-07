@@ -36,3 +36,13 @@
     - belive passion
     - love not only like
     - simplify and focus
+** <2015-12-15 二>
+*** 1.15
+    - code chat
+    - user understand
+    - function
+    - 数据平台
+    - image recongization
+    - 用户体验
+    - auto genate content
+    

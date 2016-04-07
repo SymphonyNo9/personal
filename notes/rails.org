@@ -1,2 +1,23 @@
-* 安装
+* 安装（同时有ruby相关）
   gem install rails
+  配置文件在~/.gemrc 或者 /etc/gemrc
+  bundle 解决了依赖问题
+  rake 相当于make ？
+
+* 常见问题
+** migration
+   - 增加字段 rails generate migration AddUpdatetimeToSuggestion update_time:datetime
+** views
+   - 加载js和css：在config/init../assets 中加Rails.application.config.assets.precompile += [/.*\.js/,/.*\.css/]
+** rails 4
+   - mysql2 指定版本
+
+* 学习概念
+  整个rails guide 都很重要呀，没必要做笔记了，不懂酒去通读
+** active record
+   mvc 中的m，负责业务逻辑和持久化。
+   - 模型类名 ＝》 数据表名（复数）?怎么实现自动变形的
+   - 驼峰命名 ＝》 数据库下划线
+   用法：model class 继承 ActiveRecord:Base 类
+*** 默认实现了curd操作，详查文档
+    urd操作之前可以做数据验证操作，严厉的可以抛出异常
