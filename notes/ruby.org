@@ -1,3 +1,6 @@
 * 语言学习
+** 语法
+*** 双冒号
+    定义namespace,或者叫scope
 * 包管理工具rubygems
 * 

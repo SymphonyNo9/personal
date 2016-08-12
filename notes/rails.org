@@ -13,9 +13,22 @@
    - mysql2 指定版本
 
 * 学习概念
-  整个rails guide 都很重要呀，没必要做笔记了，不懂酒去通读
+  整个rails guide 都很重要呀，不懂酒去通读
 ** active record
    mvc 中的m，负责业务逻辑和持久化。
+*** active record pattern(这是概念） 
+    object包含的是数据和其对应的行为，说白了就是封装了数据库操作并且具有一定的安全或者逻辑的检查，使得数据库操作具有对应于业务的抽象逻辑
+*** orm (object relational mapping, 这是技术手段）
+    使语言中的object对象和关系数据库sql操作对应起来
+*** 使用
+    继承ActiveRecord::Base 类
+*** 作用
+    + 表示模型和其中的数据
+    + 表示模型之间的关系
+    + 表示继承等关系？
+    + 验证模型在持久化数据之前
+    + 以面向对象的方式处理数据库
+*** rails 约定
    - 模型类名 ＝》 数据表名（复数）?怎么实现自动变形的
    - 驼峰命名 ＝》 数据库下划线
    用法：model class 继承 ActiveRecord:Base 类
