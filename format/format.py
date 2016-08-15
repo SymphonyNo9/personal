@@ -2,33 +2,8 @@
 import csv
 import sys
 import xlrd
-
-
-def format_csv(file_name, col_index):
-    col1 = int(col_index[0]) - 1
-    col2 = int(col_index[1]) - 1
-    col3 = int(col_index[2]) - 1
-    f = open(file_name, 'rb')
-    wf = open('format-' + file_name, 'wb')
-    csvreader = csv.reader(f, delimiter=' ')
-    csvwriter = csv.writer(wf, delimiter=' ')
-    i = 0
-    for row in csvreader:
-        i += 1
-        if row[col1] + row[col2] == row[col3]:
-            pass
-        else:
-            if row[col3].find(row[col1]) != -1:
-                start = row[col3].find(row[col1])
-                row[col2] = row[col3][start + len(row[col1]):]
-            elif row[col3].find(row[col2]) != -1:
-                end = row[col3].find(row[col2])
-                row[col1] = row[col3][:end]
-            else:
-                print 'fail line ' + str(i)
-        csvwriter.writerow(row)
-    f.close()
-    wf.close()
+import xlwt
+from xlutils.copy import copy
 
 
 def get_value(sh, row, col):
@@ -36,30 +11,48 @@ def get_value(sh, row, col):
 
 
 def format_xlsx(file_name, sheet_name, col_index):
-    wb = xlrd.open_workbook(file_name)
+    er = xlrd.open_workbook(file_name)
     # 检查表单名字：
     # print wb.sheet_names()
     col1 = int(col_index[0]) - 1
     col2 = int(col_index[1]) - 1
     col3 = int(col_index[2]) - 1
-    sh = wb.sheet_by_name(sheet_name)
+    sh = er.sheet_by_name(sheet_name)
+
+    ew = xlwt.Workbook()
+    format_sheet = ew.add_sheet('format')
+    #通过get_sheet()获取的sheet有write()方法
+    # ew = copy(er)
+    # format_sheet = ew.get_sheet(0)  #1代表是写到第几个工作表里，从0开始算是第一个。
+    # ws.write(1, 6, 'changed!')
+
     #递归打印出每行的信息：
     for row in range(sh.nrows):
         print sh.row_values(row)
         if get_value(sh, row, col1) + get_value(sh, row, col2) == get_value(sh, row, col3):
-            pass
+            format_sheet.write(row, col1, get_value(sh, row, col1))
+            format_sheet.write(row, col2, get_value(sh, row, col2))
+            format_sheet.write(row, col3, get_value(sh, row, col3))
         else:
-            if not get_value(sh, row, col2):
-                pass
+            if '^' in get_value(sh, row, col3):
+                ab = get_value(sh, row, col3).split('^')
+                format_sheet.write(row, col1, ab[0])
+                format_sheet.write(row, col2, '^' + ab[1])
+                format_sheet.write(row, col3, get_value(sh, row, col3))
+            else:
+                format_sheet.write(row, col1, get_value(sh, row, col3))
+                format_sheet.write(row, col2, '')
+                format_sheet.write(row, col3, get_value(sh, row, col3))
+    ew.save('format-' + file_name)
 
 if __name__ == '__main__':
-    # if len(sys.argv) < 2:
-    #     print 'Usage:%s %s %s \n' % (sys.argv[0], 'file name', 'column numer')
-    #     print 'give column numbers like 1,2,3, otherwise I will use 1,2,3 as default'
-    #     exit()
-    # if len(sys.argv) == 3:
-    #     col_index = sys.argv[2].split(',')
-    # else:
-    #     col_index = [1, 2, 3]
-    # format(sys.argv[1], col_index)
-    format_xlsx('test.xlsx', 'Sheet1', [1, 2, 3])
+    if len(sys.argv) < 2:
+        print 'Usage:%s %s %s \n' % (sys.argv[0], 'file name', 'column numer')
+        print 'give column numbers like 1,2,3, otherwise I will use 1,2,3 as default'
+        exit()
+    if len(sys.argv) == 3:
+        col_index = sys.argv[2].split(',')
+    else:
+        col_index = [1, 2, 3]
+    format_xlsx(sys.argv[1], 'Sheet1', col_index)
+    # format_xlsx('test.xlsx', 'Sheet1', [1, 2, 3])
