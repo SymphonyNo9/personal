@@ -34,6 +34,7 @@ def format_csv(file_name, col_index):
 def get_value(sh, row, col):
     return sh.cell(row, col).value
 
+
 def format_xlsx(file_name, sheet_name, col_index):
     wb = xlrd.open_workbook(file_name)
     # 检查表单名字：
@@ -43,12 +44,12 @@ def format_xlsx(file_name, sheet_name, col_index):
     col3 = int(col_index[2]) - 1
     sh = wb.sheet_by_name(sheet_name)
     #递归打印出每行的信息：
-    for rownum in range(sh.nrows):
-        print sh.row_values(rownum)
-        if get_value(sh,rownum, col1) + get_value(sh,rownum, col2) == get_value(sh,rownum, col3):
+    for row in range(sh.nrows):
+        print sh.row_values(row)
+        if get_value(sh, row, col1) + get_value(sh, row, col2) == get_value(sh, row, col3):
             pass
         else:
-            if not get_value(sh,rownum, col2):
+            if not get_value(sh, row, col2):
                 pass
 
 if __name__ == '__main__':
