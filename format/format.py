@@ -3,11 +3,24 @@ import csv
 import sys
 import xlrd
 import xlwt
-from xlutils.copy import copy
+from openpyxl.writer.excel import ExcelWriter
+from openpyxl.workbook import Workbook
 
 
 def get_value(sh, row, col):
-    return sh.cell(row, col).value
+    value = sh.cell(row, col).value
+    if type(value) == float:
+        value = str(value)
+    else:
+        value = value
+    return value
+
+
+def copy_origin(sh, fs, row, col1, col2, col3):
+    col_range = range(0, col1) + range(col1 + 1, col2) + range(col2 + 1, col3) + range(col3 + 1, sh.ncols)
+    col_set = list(set(col_range))
+    for i in col_set:
+        fs.write(row, i, get_value(sh, row, i))
 
 
 def format_xlsx(file_name, sheet_name, col_index):
@@ -21,29 +34,31 @@ def format_xlsx(file_name, sheet_name, col_index):
 
     ew = xlwt.Workbook()
     format_sheet = ew.add_sheet('format')
-    #通过get_sheet()获取的sheet有write()方法
-    # ew = copy(er)
-    # format_sheet = ew.get_sheet(0)  #1代表是写到第几个工作表里，从0开始算是第一个。
-    # ws.write(1, 6, 'changed!')
+
+    # wb = Workbook()  #创建工作薄
+    # ew = ExcelWriter(workbook=wb)  # 写入工作薄对象
+    # format_sheet = wb.create_sheet()       #创建表格
+    # format_sheet.title = 'format'            #创建标题
+    # # format_sheet.cell(None, row=1, column=1).value = '**'    #写入单元格内容
 
     #递归打印出每行的信息：
     for row in range(sh.nrows):
-        print sh.row_values(row)
-        if get_value(sh, row, col1) + get_value(sh, row, col2) == get_value(sh, row, col3):
-            format_sheet.write(row, col1, get_value(sh, row, col1))
-            format_sheet.write(row, col2, get_value(sh, row, col2))
-            format_sheet.write(row, col3, get_value(sh, row, col3))
+        if row == 0 or get_value(sh, row, col3) == '' or get_value(sh, row, col1) + get_value(sh, row, col2) == get_value(sh, row, col3):
+            for i in range(sh.ncols):
+                format_sheet.write(row, i, get_value(sh, row, i))
         else:
             if '^' in get_value(sh, row, col3):
                 ab = get_value(sh, row, col3).split('^')
                 format_sheet.write(row, col1, ab[0])
                 format_sheet.write(row, col2, '^' + ab[1])
                 format_sheet.write(row, col3, get_value(sh, row, col3))
+                copy_origin(sh, format_sheet, row, col1, col2, col3)
             else:
                 format_sheet.write(row, col1, get_value(sh, row, col3))
                 format_sheet.write(row, col2, '')
                 format_sheet.write(row, col3, get_value(sh, row, col3))
-    ew.save('format-' + file_name)
+                copy_origin(sh, format_sheet, row, col1, col2, col3)
+    ew.save('format-' + file_name.replace('xlsx', 'xls'))
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
