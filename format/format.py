@@ -3,8 +3,6 @@ import csv
 import sys
 import xlrd
 import xlwt
-from openpyxl.writer.excel import ExcelWriter
-from openpyxl.workbook import Workbook
 
 
 def get_value(sh, row, col):
